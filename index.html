@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hadiah spesial 😁</title>
+  <style>
+    html,body{height:100%;margin:0;background:#000;overflow:hidden}
+    .cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;background:#000;color:#fff;font-family:sans-serif}
+    .cover button{padding:12px 20px;font-weight:700;border:0;border-radius:12px;background:#fff;color:#000;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.5)}
+    .cover small{opacity:.6}
+    #scare{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .05s ease}
+    .shake{animation:shake .4s ease-in-out 6}
+    @keyframes shake{
+      0%{transform:translate(0,0)}
+      25%{transform:translate(10px,-8px)}
+      50%{transform:translate(-10px,8px)}
+      75%{transform:translate(8px,-10px)}
+      100%{transform:translate(0,0)}
+    }
+  </style>
+</head>
+<body>
+  <div class="cover" id="gate">
+    <p>Klik untuk lihat hadiah 🎁</p>
+    <button id="start">Buka</button>
+    <small>Pastikan volume nyala 🔊</small>
+  </div>
+  <img id="scare" src="assets/scare.jpg" alt="">
+  <audio id="sfx" src="assets/scream.mp3" preload="auto"></audio>
+<script>
+  const gate = document.getElementById('gate');
+  const img = document.getElementById('scare');
+  const sfx = document.getElementById('sfx');
+  const body = document.body;
+
+  function go(){
+    gate.style.display = 'none';
+    setTimeout(()=>{
+      img.style.opacity = '1';
+      body.classList.add('shake');
+      try{ sfx.play(); }catch(e){}
+    },200);
+  }
+
+  document.getElementById('start').addEventListener('click',go);
+</script>
+</body>
+</html>
